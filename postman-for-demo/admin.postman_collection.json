@@ -1,0 +1,260 @@
+{
+	"info": {
+		"_postman_id": "50b4b578-b2f2-443b-b951-70c3c97c24f6",
+		"name": "admin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30922081",
+		"_collection_link": "https://crimson-escape-715159.postman.co/workspace/java~8679475b-ac41-498d-a434-f1a53cc5c08f/collection/30922081-50b4b578-b2f2-443b-b951-70c3c97c24f6?action=share&source=collection_link&creator=30922081"
+	},
+	"item": [
+		{
+			"name": "get all cusotmers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/admin/customer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all companies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/admin/company",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete existing customer",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"name\": \"Spring Sale 20% Off\",\r\n        \"amount\": 20,\r\n        \"price\": 30.0,\r\n        \"description\": \"😎\",\r\n        \"startDate\": \"2024-06-01\",\r\n        \"endDate\": \"2024-06-01\",\r\n        \"category\": \"Clothing\",\r\n        \"companyId\": 1\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/admin/customer/202",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"customer",
+						"202"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post new customer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\r\n        \"name\": \"Tehila_Aharonovich_1\",\r\n        \"email\": \"PNINAA@FUEHRER.CO.IL\",\r\n        \"password\": \"cus111\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/admin/customer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "post new company",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"name\": \"copany2\",\r\n        \"email\": \"co@gmail.com\",\r\n        \"password\": \"m222\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/admin/company",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"company"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete company",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"name\": \"copany2\",\r\n        \"email\": \"co@gmail.com\",\r\n        \"password\": \"m222\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/admin/company/52",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"company",
+						"52"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get cusotmers by coupon id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/admin/coupon/453/customer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"coupon",
+						"453",
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update existing company",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"id\": 52,\r\n        \"name\": \"חלב🧋\",\r\n        \"email\": \"PNINAA@FUEHRER.CO.IL\",\r\n        \"password\": \"cus111\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/admin/company/52",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"company",
+						"52"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update existing customer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": " {\r\n        \"id\": 52,\r\n        \"name\": \"חלב🧋\",\r\n        \"email\": \"PNINAA@FUEHRER.CO.IL\",\r\n        \"password\": \"cus111\"\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/admin/company/52",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"admin",
+						"company",
+						"52"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

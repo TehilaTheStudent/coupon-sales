@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "56ca2c9b-9e9e-4df7-8a50-4c83b338cf3a",
+		"name": "general",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30922081",
+		"_collection_link": "https://crimson-escape-715159.postman.co/workspace/java~8679475b-ac41-498d-a434-f1a53cc5c08f/collection/30922081-56ca2c9b-9e9e-4df7-8a50-4c83b338cf3a?action=share&source=collection_link&creator=30922081"
+	},
+	"item": [
+		{
+			"name": "get  all coupons",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/coupon",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"coupon"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get  all coupons with maxPrice",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/coupon?maxPrice=20",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"coupon"
+					],
+					"query": [
+						{
+							"key": "maxPrice",
+							"value": "20"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get  all coupons with category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/coupon?category=Restaurants",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"coupon"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "Restaurants"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get  all coupons with category and maxPrice",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/coupon?category=Restaurants&maxPrice=10",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"coupon"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "Restaurants"
+						},
+						{
+							"key": "maxPrice",
+							"value": "10"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

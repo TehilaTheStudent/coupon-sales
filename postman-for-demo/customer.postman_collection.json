@@ -1,0 +1,65 @@
+{
+	"info": {
+		"_postman_id": "1f89455f-fc33-44b4-a124-a0d151475b24",
+		"name": "customer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30922081",
+		"_collection_link": "https://crimson-escape-715159.postman.co/workspace/java~8679475b-ac41-498d-a434-f1a53cc5c08f/collection/30922081-1f89455f-fc33-44b4-a124-a0d151475b24?action=share&source=collection_link&creator=30922081"
+	},
+	"item": [
+		{
+			"name": "get  coupons by customer id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/customer/2/coupon",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"customer",
+						"2",
+						"coupon"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add existing coupon to existing customer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "  {\r\n        \"name\": \"Spring Sale 20% Off\",\r\n        \"amount\": 20,\r\n        \"price\": 30.0,\r\n        \"description\": \"😎\",\r\n        \"startDate\": \"2024-06-01\",\r\n        \"endDate\": \"2024-06-01\",\r\n        \"category\": \"Clothing\",\r\n        \"companyId\": 1\r\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/customer/2/coupon/453",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"customer",
+						"2",
+						"coupon",
+						"453"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
