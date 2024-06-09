@@ -5,6 +5,7 @@ import com.example.demo.Coupon;
 import com.example.demo.Credentials;
 import com.example.demo.DTOs.CouponDto;
 import com.example.demo.Exception.CustomException;
+import com.example.demo.Role;
 import com.example.demo.Service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,8 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/company")
-public class CompanyController {
-    @Autowired
+public class CompanyController extends ClientController {
+//    @Autowired
     private CompanyService companyService;
 
     @PostMapping("/{companyId}")
@@ -53,6 +54,16 @@ public class CompanyController {
         try {
             return ResponseEntity.ok(companyService.deleteCouponByCustomerIdAndCouponId(companyId,couponId));
 
+        } catch (CustomException customException) {
+            return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+    @Override
+    @PostMapping("/login")
+    public ResponseEntity<?> loginByCredentials(@RequestBody Credentials credentials) {
+        try {
+            companyService = (CompanyService) loginManager.login(credentials, Role.COMPANY_ROLE);
+            return ResponseEntity.ok(true);
         } catch (CustomException customException) {
             return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
         }

@@ -16,6 +16,8 @@ import java.util.stream.Collectors;
 
 @Service
 public class AdminService extends ClientService {
+
+
     public CustomerDto createCustomer(CustomerDto customerDto) throws CustomException {
         if (customerDto == null) {
             throw new CustomException("in createCustomer: customer is null");
@@ -187,4 +189,8 @@ public class AdminService extends ClientService {
         }
     }
 
+    @Override
+    public boolean login(Credentials credentials) {
+        return credentials.getEmail().equals("admin@gmail.com")&&credentials.getPassword().equals("admin");
+    }
 }

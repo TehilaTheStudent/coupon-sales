@@ -2,6 +2,7 @@ package com.example.demo.Service;
 
 import com.example.demo.Category;
 import com.example.demo.Coupon;
+import com.example.demo.Credentials;
 import com.example.demo.DTOs.CouponDto;
 import org.springframework.stereotype.Service;
 
@@ -30,5 +31,10 @@ public class GeneralService extends ClientService{
         Set<Coupon> couponSet = iCouponRepository.findByPriceLessThanEqualAndCategory(maxPrice,category);
         List<CouponDto> couponDtos = couponSet.stream().map(this::couponToDto).toList();
         return couponDtos;
+    }
+
+    @Override
+    public boolean login(Credentials credentials) {
+        return false;
     }
 }

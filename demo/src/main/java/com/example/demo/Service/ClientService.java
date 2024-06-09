@@ -17,6 +17,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public abstract class ClientService {
+
     @Autowired
     protected ICustomerRepository iCustomerRepository;
 
@@ -24,7 +25,7 @@ public abstract class ClientService {
     protected ICompanyRepository iCompanyRepository;
     @Autowired
     protected ICouponRepository iCouponRepository;
-
+    public abstract boolean  login(Credentials credentials);
     protected CouponDto couponToDto(Coupon coupon) {
         CouponDto couponDto = new CouponDto(coupon.getId(), coupon.getName(), coupon.getAmount(), coupon.getPrice(), coupon.getDescription(), coupon.getStartDate(), coupon.getEndDate(), coupon.getCategory(), coupon.getCompany().getId());
         return couponDto;

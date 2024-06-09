@@ -29,23 +29,23 @@ public class CustomerService extends ClientService {
         if (existingCoupon == null) {
             throw new CustomException("in addExistingCouponToExistingCustomer: existingCoupon not found");
         }
-        if(existingCoupon.getEndDate().isBefore(LocalDate.now())){
+        if (existingCoupon.getEndDate().isBefore(LocalDate.now())) {
             throw new CustomException("in addExistingCouponToExistingCustomer: the existing coupon end date is before today");
         }
-        if(iCouponRepository.findByIdAndCustomersContainingCustomerId(couponId,customerId)!=null){
+        if (iCouponRepository.findByIdAndCustomersContainingCustomerId(couponId, customerId) != null) {
             throw new CustomException("in addExistingCouponToExistingCustomer: existing customer has this coupon already");
         }
-        if(existingCoupon.getAmount()<1){
-            throw  new CustomException("in addExistingCouponToExistingCustomer: the existing coupon amount is 0");
+        if (existingCoupon.getAmount() < 1) {
+            throw new CustomException("in addExistingCouponToExistingCustomer: the existing coupon amount is 0");
         }
-        existingCoupon.setAmount(existingCoupon.getAmount()-1);
+        existingCoupon.setAmount(existingCoupon.getAmount() - 1);
         iCouponRepository.save(existingCoupon);
         existingCustomer.getCoupons().add(existingCoupon);
         existingCustomer = iCustomerRepository.save(existingCustomer);
         return couponToDto(existingCoupon);
     }
 
-    public List<CouponDto> getCouponsByCustomerId(Long customerId) throws CustomException{
+    public List<CouponDto> getCouponsByCustomerId(Long customerId) throws CustomException {
         Customer existingCustomer = iCustomerRepository.findById(customerId).orElse(null);
         if (existingCustomer == null) {
             throw new CustomException("in getCouponsByCustomerId: existingCustomer not found");
@@ -53,12 +53,22 @@ public class CustomerService extends ClientService {
         List<CouponDto> couponDtos = iCouponRepository.findCouponsByCustomerId(customerId).stream().map(this::couponToDto).toList();
         return couponDtos;
     }
-    public CustomerDto getCustomerByCredentials(Credentials credentials) throws CustomException{
-        Customer customer=iCustomerRepository.findCustomersByCredentials(credentials);
-        if(customer==null){
-            throw new CustomException("in getCustomerByCredentials: customer not found "+credentials);
+
+    public CustomerDto getCustomerByCredentials(Credentials credentials) throws CustomException {
+        Customer customer = iCustomerRepository.findCustomersByCredentials(credentials);
+        if (customer == null) {
+            throw new CustomException("in getCustomerByCredentials: customer not found " + credentials);
         }
         return customerToDto(customer);
+    }
+
+    @Override
+    public boolean login(Credentials credentials) {
+        Customer customer = iCustomerRepository.findCustomersByCredentials(credentials);
+        if (customer != null) {
+            return true;
+        }
+        return false;
     }
 
 

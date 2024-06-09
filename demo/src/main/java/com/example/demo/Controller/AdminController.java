@@ -9,6 +9,7 @@ import com.example.demo.Service.AdminService;
 import com.example.demo.Service.CompanyService;
 import com.example.demo.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,19 +20,22 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
-public class AdminController {
-    @Autowired
-    private AdminService adminService;
-    @Autowired
-    private CustomerService customerService;
+public class AdminController extends ClientController {
 
-    @Autowired
-    private CompanyService companyService;
+    //    @Autowired
+    private AdminService adminService;
+
+
+//    @Autowired
+//    private CompanyService companyService;
+
     @GetMapping("/demo")
-    public Credentials getDemo(){
+    public Credentials getDemo() {
         System.out.println("demo");
-        return new Credentials("fdfd","fdfd");
+
+        return new Credentials("fdfd", "fdfd");
     }
+
     @GetMapping("/customer")
     public List<CustomerDto> getAllCustomers() {
         return adminService.getAllCustomers();
@@ -49,17 +53,17 @@ public class AdminController {
 
     @PostMapping("/customer")
     public ResponseEntity<?> createCustomer(@RequestBody CustomerDto customerDto) {
-        try{
-            return  ResponseEntity.ok(adminService.createCustomer(customerDto));
-        }catch(CustomException customException){
-            return new ResponseEntity<>(customException.getMessage(),HttpStatus.BAD_REQUEST);
+        try {
+            return ResponseEntity.ok(adminService.createCustomer(customerDto));
+        } catch (CustomException customException) {
+            return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @PutMapping("/customer/{id}")
     public ResponseEntity<?> updateCustomer(@PathVariable Long id, @RequestBody CustomerDto customerDto) {
         try {
-            return ResponseEntity.ok(adminService.updateCustomer(id,customerDto));
+            return ResponseEntity.ok(adminService.updateCustomer(id, customerDto));
         } catch (CustomException customException) {
             return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
         }
@@ -67,10 +71,10 @@ public class AdminController {
 
     @DeleteMapping("/customer/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable Long id) {
-        try{
-            return  ResponseEntity.ok(adminService.deleteCustomer(id));
-        }catch(CustomException customException){
-            return new ResponseEntity<>(customException.getMessage(),HttpStatus.BAD_REQUEST);
+        try {
+            return ResponseEntity.ok(adminService.deleteCustomer(id));
+        } catch (CustomException customException) {
+            return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -81,50 +85,62 @@ public class AdminController {
 
     @GetMapping("/company/{id}")
     public ResponseEntity<?> getCompanyById(@PathVariable Long id) {
-        try{
-            return  ResponseEntity.ok(adminService.getCustomerById(id));
-        }catch(CustomException customException){
-            return new ResponseEntity<>(customException.getMessage(),HttpStatus.BAD_REQUEST);
+        try {
+            return ResponseEntity.ok(adminService.getCustomerById(id));
+        } catch (CustomException customException) {
+            return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @PostMapping("/company")
     public ResponseEntity<?> createCompany(@RequestBody CompanyDto companyDto) {
-        try{
-            return  ResponseEntity.ok(adminService.createCompany(companyDto));
-        }catch(CustomException customException){
-            return new ResponseEntity<>(customException.getMessage(),HttpStatus.BAD_REQUEST);
+        try {
+            return ResponseEntity.ok(adminService.createCompany(companyDto));
+        } catch (CustomException customException) {
+            return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @PutMapping("/company/{id}")
     public ResponseEntity<?> updateCompany(@PathVariable Long id, @RequestBody CompanyDto companyDto) {
-        try{
-            return  ResponseEntity.ok(adminService.updateCompany(id, companyDto));
-        }catch(CustomException customException){
-            return new ResponseEntity<>(customException.getMessage(),HttpStatus.BAD_REQUEST);
+        try {
+            return ResponseEntity.ok(adminService.updateCompany(id, companyDto));
+        } catch (CustomException customException) {
+            return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @DeleteMapping("/company/{id}")
     public ResponseEntity<?> deleteCompany(@PathVariable Long id) {
-        try{
-            return  ResponseEntity.ok(adminService.deleteCompany(id));
-        }catch(CustomException customException){
-            return new ResponseEntity<>(customException.getMessage(),HttpStatus.BAD_REQUEST);
+        try {
+            return ResponseEntity.ok(adminService.deleteCompany(id));
+        } catch (CustomException customException) {
+            return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
     }
+
     @GetMapping("/coupon/{id}/customer")
     public ResponseEntity<?> getCustomersByCouponId(@PathVariable Long id) {
-        try{
-            return  ResponseEntity.ok(adminService.getCustomersByCouponId(id));
-        }catch(CustomException customException){
-            return new ResponseEntity<>(customException.getMessage(),HttpStatus.BAD_REQUEST);
+        try {
+            return ResponseEntity.ok(adminService.getCustomersByCouponId(id));
+        } catch (CustomException customException) {
+            return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
         }
 
     }
 
+    @Override
+    @PostMapping("/login")
+    public ResponseEntity<?> loginByCredentials(@RequestBody   Credentials credentials) {
+        System.out.println(credentials);
+        try {
+            adminService = (AdminService) loginManager.login(credentials,Role.ADMIN_ROLE);
+            return ResponseEntity.ok(true);
+        } catch (CustomException customException) {
+            return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 
 
 //    @PostMapping("/fillData")

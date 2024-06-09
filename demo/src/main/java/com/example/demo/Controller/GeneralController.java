@@ -25,6 +25,7 @@ public class GeneralController {
     private GeneralService generalService;
     @Autowired
     private AdminService adminService;
+    //this is only for the angular client i created, not to show the teacher
     @PostMapping("/login")
     public ResponseEntity<?> getRoleByCredentials(@RequestBody Credentials credentials){
         if(credentials.getEmail().equals("admin@gamil.com")&&credentials.getPassword().equals("admin1"))

@@ -4,6 +4,8 @@ import com.example.demo.Credentials;
 import com.example.demo.Customer;
 import com.example.demo.DAO_IRepository.ICustomerRepository;
 import com.example.demo.Exception.CustomException;
+import com.example.demo.Role;
+import com.example.demo.Service.CompanyService;
 import com.example.demo.Service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,11 +16,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/customer")
-public class CustomerController {
+public class CustomerController extends ClientController {
 //TODO check if email/password exists in adding company/customer,
     //TODO make error checking- the coupon exists for the customer...
     //TODO pay attention to the dates!!!
-    @Autowired
+//    @Autowired
     private CustomerService customerService;
 
     @PutMapping("/{customerId}/coupon/{couponId}")
@@ -49,5 +51,14 @@ public class CustomerController {
             return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
         }
     }
-
+    @Override
+    @PostMapping("/login")
+    public ResponseEntity<?> loginByCredentials(  Credentials credentials) {
+        try {
+            customerService = (CustomerService) loginManager.login(credentials, Role.CUSTOMER_ROLE);
+            return ResponseEntity.ok(true);
+        } catch (CustomException customException) {
+            return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
 }

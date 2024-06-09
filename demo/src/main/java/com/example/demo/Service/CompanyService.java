@@ -92,4 +92,13 @@ public class CompanyService extends ClientService {
             throw new CustomException("end date before start date");
         }
     }
+
+    @Override
+    public boolean login(Credentials credentials) {
+        Company company=iCompanyRepository.findCompanyByCredentials(credentials);
+        if(company!=null){
+            return true;
+        }
+        return false;
+    }
 }

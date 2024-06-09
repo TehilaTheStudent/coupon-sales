@@ -9,6 +9,6 @@ public interface ICustomerRepository extends JpaRepository<Customer,Long> {
     Customer findByCredentialsEmail(String email);
     Customer findByCredentialsPassword(String password);
     Customer findCustomersByCredentials(Credentials credentials);
-
+    Customer findByCredentials(Credentials credentials);
 
 }
