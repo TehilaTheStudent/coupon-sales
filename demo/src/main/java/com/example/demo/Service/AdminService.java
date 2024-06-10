@@ -190,7 +190,10 @@ public class AdminService extends ClientService {
     }
 
     @Override
-    public boolean login(Credentials credentials) {
-        return credentials.getEmail().equals("admin@gmail.com")&&credentials.getPassword().equals("admin");
+    public boolean login(Credentials credentials) throws CustomException {
+        if(credentials.getEmail().equals("admin@gmail.com")&&credentials.getPassword().equals("admin")){
+            return true;
+        }
+        throw new CustomException("login for admin failed-invalid email or password!!!");
     }
 }

@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/")
 public class GeneralController {
     @Autowired
     private GeneralService generalService;

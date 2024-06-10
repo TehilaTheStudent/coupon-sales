@@ -10,6 +10,7 @@ import com.example.demo.DAO_IRepository.ICustomerRepository;
 import com.example.demo.DTOs.CompanyDto;
 import com.example.demo.DTOs.CouponDto;
 import com.example.demo.DTOs.CustomerDto;
+import com.example.demo.Exception.CustomException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.HashSet;
@@ -25,7 +26,7 @@ public abstract class ClientService {
     protected ICompanyRepository iCompanyRepository;
     @Autowired
     protected ICouponRepository iCouponRepository;
-    public abstract boolean  login(Credentials credentials);
+    public abstract boolean  login(Credentials credentials) throws CustomException;
     protected CouponDto couponToDto(Coupon coupon) {
         CouponDto couponDto = new CouponDto(coupon.getId(), coupon.getName(), coupon.getAmount(), coupon.getPrice(), coupon.getDescription(), coupon.getStartDate(), coupon.getEndDate(), coupon.getCategory(), coupon.getCompany().getId());
         return couponDto;

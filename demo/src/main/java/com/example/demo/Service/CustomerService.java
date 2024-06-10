@@ -63,12 +63,12 @@ public class CustomerService extends ClientService {
     }
 
     @Override
-    public boolean login(Credentials credentials) {
+    public boolean login(Credentials credentials) throws CustomException {
         Customer customer = iCustomerRepository.findCustomersByCredentials(credentials);
         if (customer != null) {
             return true;
         }
-        return false;
+        throw new CustomException("customer not found by credentials");
     }
 
 

@@ -1,8 +1,11 @@
 package com.example.demo.DAO_IRepository;
 
 import com.example.demo.Company;
+import com.example.demo.Coupon;
 import com.example.demo.Credentials;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Set;
 
 public interface ICompanyRepository extends JpaRepository<Company,Long> {
     Company findByCredentialsEmail(String email);
@@ -11,5 +14,8 @@ public interface ICompanyRepository extends JpaRepository<Company,Long> {
     Company findCompanyByCredentials(Credentials credentials);
 
     Company findByCredentials(Credentials credentials);
+
+
+
 
 }

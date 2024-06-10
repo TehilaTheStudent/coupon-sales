@@ -7,6 +7,7 @@ import com.example.demo.Exception.CustomException;
 import com.example.demo.Role;
 import com.example.demo.Service.CompanyService;
 import com.example.demo.Service.CustomerService;
+import com.example.demo.jwt.AuthenticationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class CustomerController extends ClientController {
 //TODO check if email/password exists in adding company/customer,
     //TODO make error checking- the coupon exists for the customer...
     //TODO pay attention to the dates!!!
-//    @Autowired
+   @Autowired
     private CustomerService customerService;
 
     @PutMapping("/{customerId}/coupon/{couponId}")
@@ -55,8 +56,9 @@ public class CustomerController extends ClientController {
     @PostMapping("/login")
     public ResponseEntity<?> loginByCredentials(  Credentials credentials) {
         try {
-            customerService = (CustomerService) loginManager.login(credentials, Role.CUSTOMER_ROLE);
-            return ResponseEntity.ok(true);
+           customerService.login(credentials);
+           String token=jwtUtils.generateToken(credentials,Role.CUSTOMER_ROLE);
+           return ResponseEntity.ok(new AuthenticationResponse(token));
         } catch (CustomException customException) {
             return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
         }

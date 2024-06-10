@@ -94,11 +94,12 @@ public class CompanyService extends ClientService {
     }
 
     @Override
-    public boolean login(Credentials credentials) {
+    public boolean login(Credentials credentials) throws  CustomException {
+
         Company company=iCompanyRepository.findCompanyByCredentials(credentials);
         if(company!=null){
             return true;
         }
-        return false;
+        throw new CustomException("company not found by credentials");
     }
 }

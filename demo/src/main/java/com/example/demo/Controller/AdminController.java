@@ -8,6 +8,7 @@ import com.example.demo.Exception.CustomException;
 import com.example.demo.Service.AdminService;
 import com.example.demo.Service.CompanyService;
 import com.example.demo.Service.CustomerService;
+import com.example.demo.jwt.AuthenticationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.http.HttpStatus;
@@ -22,7 +23,7 @@ import java.util.List;
 @RequestMapping("/api/admin")
 public class AdminController extends ClientController {
 
-    //    @Autowired
+        @Autowired
     private AdminService adminService;
 
 
@@ -133,10 +134,11 @@ public class AdminController extends ClientController {
     @Override
     @PostMapping("/login")
     public ResponseEntity<?> loginByCredentials(@RequestBody   Credentials credentials) {
-        System.out.println(credentials);
         try {
-            adminService = (AdminService) loginManager.login(credentials,Role.ADMIN_ROLE);
-            return ResponseEntity.ok(true);
+            adminService.login(credentials);
+            String token=jwtUtils.generateToken(credentials,Role.ADMIN_ROLE);
+            //TODO check here!!
+           return ResponseEntity.ok(new AuthenticationResponse(token));
         } catch (CustomException customException) {
             return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
         }

@@ -7,6 +7,7 @@ import com.example.demo.DTOs.CouponDto;
 import com.example.demo.Exception.CustomException;
 import com.example.demo.Role;
 import com.example.demo.Service.CompanyService;
+import com.example.demo.jwt.AuthenticationResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/company")
 public class CompanyController extends ClientController {
-//    @Autowired
+   @Autowired
     private CompanyService companyService;
 
     @PostMapping("/{companyId}")
@@ -62,8 +63,9 @@ public class CompanyController extends ClientController {
     @PostMapping("/login")
     public ResponseEntity<?> loginByCredentials(@RequestBody Credentials credentials) {
         try {
-            companyService = (CompanyService) loginManager.login(credentials, Role.COMPANY_ROLE);
-            return ResponseEntity.ok(true);
+           companyService.login(credentials);
+           String token =jwtUtils.generateToken(credentials,Role.COMPANY_ROLE);
+           return ResponseEntity.ok(new AuthenticationResponse(token));
         } catch (CustomException customException) {
             return new ResponseEntity<>(customException.getMessage(), HttpStatus.BAD_REQUEST);
         }
