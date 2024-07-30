@@ -41,13 +41,6 @@ The Java Coupons Project is a robust application designed to manage coupons effe
 
 Since this project is developed for academic purposes, contributions are not expected. However, feedback and suggestions are welcome!
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Contact
-
-For any inquiries, please reach out to [Your Name](mailto:your.email@example.com).
 
 ---
 
